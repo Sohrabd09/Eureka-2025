@@ -4,8 +4,8 @@ import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.SequentialAction;
 
-import org.firstinspires.ftc.teamcode.subsystes.subsystems.Intake;
-import org.firstinspires.ftc.teamcode.subsystes.subsystems.Lifter;
+import org.firstinspires.ftc.teamcode.subsystems.Intake;
+import org.firstinspires.ftc.teamcode.subsystems.Lifter;
 
 public class SpecimenIntake {
 
