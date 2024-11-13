@@ -16,13 +16,19 @@ public class Globals {
                     public static double yawLeft45 = 0 ;
                     public static double yawRight45 = 0 ;
                     public static double yawInit = 0 ;
+                    public static double yawObs = 0 ;
+                    public static double yawObsDrop = 0 ;
 
 
            // TODO Shoulder
-                public  static  double shoulderInit = 0.525 ;
+                public  static  double shoulderInit = 0.5439 ;
                 public  static  double shoulderTransfer = 0 ;
-                public  static  double shoulderIntake = 0 ;
+                public  static  double shoulderIntake = 0.0128 ;
                 public  static  double shoulderReset= 0 ;
+                public  static  double shoulderPreIntake= 0 ;
+
+                public static double shoulderObs = 0.495;
+                public static double shoulderObsDrop = 0.495;
 
 
 
@@ -30,11 +36,14 @@ public class Globals {
 
 
             // TODO IntWrist
-                    public static double IntWristIntake = 0.5938;
-                    public static double IntWristInit = 0.7994;
+                    public static double IntWristIntake = 0.7172;
+                    public static double IntWristInit = 0.;
                     public static double IntWristReset = 0;
-
                     public static double IntWristTransfer = 0;
+                    public static double IntWristPre = 0;
+                    public static double IntWristObs = 0;
+                    public static double IntWristObsDrop = 0;
+
 
 
 
@@ -42,6 +51,8 @@ public class Globals {
 
             public static double flapperOpen = 0.5978;
             public static double flapperClose = 0.9;
+            public static double flapperHold = 0.9;
+            public static double flapper = 0.9;
 
 
     // TODO HORIZONTALEXTENSION
@@ -68,8 +79,8 @@ public class Globals {
             public static double OutakeShoulderBucket = 0;
             public static double OutakeShoulderSpecimen = 0.285;
 
-//            public static double OutakeShoulderSpecimen180Right = 0;
-//            public static double OutakeShoulderSpecimen180Left = 0;
+            public static double OutakeShoulderSpecimen180 = 0;
+            public static double OutakeShoulderSpecimen180L = 0;
             public static double OutakeShoulderSpecimenIntake = 0.9667;
 
 

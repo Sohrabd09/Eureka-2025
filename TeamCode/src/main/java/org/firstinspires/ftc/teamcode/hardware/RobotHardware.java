@@ -23,28 +23,28 @@ public class RobotHardware {
     //TODO SERVOS
 
         //TODO INTAKE
-        public CRServo leftIntake;
-        public CRServo rightIntake;
-        public Servo IntYaw;
-        public Servo IntLeftShoulder;
-        public Servo IntRightShoulder;
-        public Servo IntFlapper;
-        public Servo IntWrist;
+        public CRServo leftIntake= null;
+        public CRServo rightIntake= null;
+        public Servo IntYaw= null;
+        public Servo IntLeftShoulder= null;
+        public Servo IntRightShoulder= null;
+        public Servo IntFlapper= null;
+        public Servo IntWrist= null;
         //TODO HANGER
-        public Servo Hanger;
+        public Servo Hanger= null;
         // TODO OUTAKE
-        public Servo leftOutake;
-        public Servo rightOutake;
-        public Servo OutakeGrip;
-        public Servo OutakeWirst;
+        public Servo leftOutake= null;
+        public Servo rightOutake= null;
+        public Servo OutakeGrip= null;
+        public Servo OutakeWirst= null;
 
 
 
-    public RevColorSensorV3 colourSensor;
-    public RevColorSensorV3 gripColourSensor;
+    public  RevColorSensorV3 colourSensor = null;
+    public RevColorSensorV3 gripColourSensor= null;
 
 
-   public DigitalChannel beamBreaker;
+   public DigitalChannel beamBreaker=null;
 
 
 
@@ -85,10 +85,10 @@ public class RobotHardware {
 
         //TODO HARDWARE MAP
         //DcMotor
-        lifterL = hardwareMap.get(DcMotorEx.class, "lifterL");
+        lifterL = hardwareMap.get(DcMotorEx.class, "sliderL");
         lifterL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         lifterR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        lifterR = hardwareMap.get(DcMotorEx.class, "lifterR");
+        lifterR = hardwareMap.get(DcMotorEx.class, "sliderR");
         horizontalExtension = hardwareMap.get(DcMotorEx.class, "horizontal");
         horizontalExtension.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
@@ -99,23 +99,24 @@ public class RobotHardware {
         horizontalExtension.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Servos
-        rightOutake= hardwareMap.get(Servo.class, "grip");
-        leftOutake = hardwareMap.get(Servo.class, "wrist");
-        OutakeGrip = hardwareMap.get(Servo.class, "wrist");
-        IntYaw = hardwareMap.get(Servo.class, "rotate");
-        IntLeftShoulder = hardwareMap.get(Servo.class, "leftsInt");
-        IntRightShoulder = hardwareMap.get(Servo.class, "rightsInt");
-        Hanger = hardwareMap.get(Servo.class, "hanger");
-        OutakeWirst = hardwareMap.get(Servo.class, "outakewrist");
-        IntWrist = hardwareMap.get(Servo.class, "intwrist");
-        IntFlapper = hardwareMap.get(Servo.class, "flapper");
-        rightIntake = hardwareMap.get(CRServo.class, "rightintake");
-        leftIntake= hardwareMap.get(CRServo.class, "leftintake");
+        rightOutake= hardwareMap.get(Servo.class, "rightOut");
+        leftOutake = hardwareMap.get(Servo.class, "leftOut");
+        OutakeGrip = hardwareMap.get(Servo.class, "gripper");
+        IntYaw = hardwareMap.get(Servo.class, "yaw");
+        IntLeftShoulder = hardwareMap.get(Servo.class, "elbowL");
+        IntRightShoulder = hardwareMap.get(Servo.class, "elbowR");
+        Hanger = hardwareMap.get(Servo.class, "clutch");
+        OutakeWirst = hardwareMap.get(Servo.class, "wristOut");
+        IntWrist = hardwareMap.get(Servo.class, "wrist");
+        IntFlapper = hardwareMap.get(Servo.class, "flap");
+        rightIntake = hardwareMap.get(CRServo.class, "intakeR");
+        leftIntake= hardwareMap.get(CRServo.class, "intakeL");
 
         //Sensor
-        colourSensor = hardwareMap.get(RevColorSensorV3.class, "ColourSensor");
+        colourSensor = hardwareMap.get(RevColorSensorV3.class, "csI");
+        gripColourSensor = hardwareMap.get(RevColorSensorV3.class,"cs0");
 //        specimenCam = hardwareMap.get(Camera.class, "cam1");
-        beamBreaker = hardwareMap.get(DigitalChannel.class, "beam_breaker");
+        beamBreaker = hardwareMap.get(DigitalChannel.class, "bb");
         beamBreaker.setMode(DigitalChannel.Mode.INPUT);
 
 

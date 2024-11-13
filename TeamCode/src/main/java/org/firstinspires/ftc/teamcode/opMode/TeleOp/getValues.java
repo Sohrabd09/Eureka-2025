@@ -18,6 +18,9 @@ import java.util.List;
 @Config
 
 public class getValues extends LinearOpMode {
+    public static RobotHardware robot = RobotHardware.getInstance();
+    Intake intake;
+    Lifter lifter;
     public int sliderIncrement = 0;
     public int horizontalSliderIncrement = 0;
     public double shoulderIncrement = 0;
@@ -28,9 +31,13 @@ public class getValues extends LinearOpMode {
     public double outakeWristState = 0;
     public double gripperIncrement = 0;
     public double clutchIncrement = 0 ;
-    RobotHardware robot = RobotHardware.getInstance();
-    Intake intake;
-    Lifter lifter;
+    public static int greenValue = 0;
+    public static int blueValue = 0;
+    public double LShoulderPos = 0;
+    public double RShoulderPos = 0;
+
+
+
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -104,7 +111,13 @@ public class getValues extends LinearOpMode {
                 gripperIncrement-=0.001;
                 robot.OutakeGrip.setPosition(gripperIncrement);
             }
-            telemetry.addData("Intake Colour Sensor ", detectColor());
+            if (gamepad2.dpad_left){
+                shoulderMotion(true);
+            }
+            if (gamepad2.dpad_right){
+                shoulderMotion(false);
+            }
+            telemetry.addData("Intake Colour Sensor ", robot.colourSensor.green());
             telemetry.addData("Distance Detection ", distanceDetection());
             telemetry.addData("Beam Breaker", robot.beamBreaker.getState());
             telemetry.addData("Horizontal Extension ", robot.horizontalExtension.getCurrentPosition());
@@ -123,29 +136,30 @@ public class getValues extends LinearOpMode {
 
         }
     }
-    private String detectColor() {
-        int redValue = robot.colourSensor.red();
-        int greenValue = robot.colourSensor.green();
-        int blueValue = robot.colourSensor.blue();
+    public static String detectColor() {
 
-        // Check for blue
-        if (blueValue > redValue && blueValue > greenValue && blueValue > 100) {
-            return "blue";
+             blueValue = robot.colourSensor.blue();
+             greenValue = robot.colourSensor.green();
 
-        }
+            // Check for blue
+            if (blueValue > greenValue && blueValue > 100) {
+                return "blue";
 
-        // Check for red
-        if (redValue > blueValue && redValue > greenValue && redValue > 100) {
-            return "red";
-        }
+            }
 
-        // Check for yellow (high red and green, low blue)
-        if (redValue > 100 && greenValue > 100 && blueValue < 50) {
-            return "yellow";
-        }
+            // Check for red
+    //        if (greenValue > blueValue && greenValue > greenValue && greenValue > 100) {
+    //            return "red";
+    //        }
 
-        // If no color matches, return "none"
-        return "none";
+            // Check for yellow (high red and green, low blue)
+            else if (greenValue > 100 && blueValue < 50) {
+                return "yellow";
+            }
+            else {
+                // If no color matches, return "none"
+                return "none";
+            }
     }
 
     private double distanceDetection() {
@@ -156,7 +170,28 @@ public class getValues extends LinearOpMode {
         return distance;
         //<= 7;
     }
-
+    private void shoulderMotion(boolean increase) {
+        if (increase) {
+            LShoulderPos= Math.min( LShoulderPos+ 0.001, 1);
+            RShoulderPos = Math.min(RShoulderPos + 0.001, 1);
+        } else {
+            LShoulderPos= Math.max( LShoulderPos- 0.001, 0);
+            RShoulderPos = Math.max(RShoulderPos - 0.001, 0);
+        }
+        robot.IntLeftShoulder.setPosition(LShoulderPos);
+        robot.IntRightShoulder.setPosition(RShoulderPos);
+    }
+    private void viperMotion(boolean increase) {
+        if (increase) {
+            LShoulderPos = Math.min(LShoulderPos + 0.01, 1);
+            RShoulderPos = Math.max(RShoulderPos - 0.01, 0);
+        } else {
+            LShoulderPos = Math.min(LShoulderPos - 0.01, 1);
+            RShoulderPos = Math.max(RShoulderPos + 0.01, 0);
+        }
+        robot.IntLeftShoulder.setPosition(LShoulderPos);
+        robot.IntRightShoulder.setPosition(RShoulderPos);
+        }
 
     public List<Action> updateAction() {
         TelemetryPacket packet = new TelemetryPacket();

@@ -1,5 +1,9 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+//import static org.firstinspires.ftc.robotcontroller.external.samples.ConceptScanServo.MIN_POS;
+//import static org.firstinspires.ftc.robotcontroller.external.samples.ConceptScanServo.MAX_POS;
+
+
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.InstantAction;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -8,14 +12,7 @@ import org.firstinspires.ftc.teamcode.hardware.Globals;
 import org.firstinspires.ftc.teamcode.hardware.RobotHardware;
 
 public class Intake {
-
-
-
     RobotHardware robot;
-
-
-
-
     public Intake(RobotHardware robot) {
         this.robot = robot;
     }
@@ -46,6 +43,8 @@ public class Intake {
             TRANSFER,
             INTAKE,
             RESET,
+            PREINTAKE,
+            OBSERVATION,
 
 
     }
@@ -65,6 +64,11 @@ public class Intake {
             case TRANSFER:
                 shoulderPos(Globals.shoulderTransfer);
                 break;
+            case PREINTAKE:
+                shoulderPos(Globals.shoulderPreIntake);
+                break;
+            case OBSERVATION:
+                shoulderPos(Globals.shoulderObs);
         }
     }
 
@@ -98,7 +102,10 @@ public class Intake {
                 INTAKE,
                 INIT,
                 RESET,
-                TRANSFER
+                TRANSFER,
+                OBSERVATIONPRE,
+                PREINTAKE,
+                OBSERVATIONDROP,
         }
 
         public void update(intWristState state){
@@ -115,11 +122,19 @@ public class Intake {
                         case INTAKE:
                             robot.IntWrist.setPosition(Globals.IntWristIntake);
                             break;
+                        case OBSERVATIONPRE:
+                            robot.IntWrist.setPosition(Globals.IntWristObs);
+                            break;
+                        case PREINTAKE:
+                            robot.IntWrist.setPosition(Globals.IntWristPre);
+                            break;
                     }
         }
         public enum flapperState {
                 OPEN,
                 CLOSE,
+                HOLD,
+
         }
         public void update(flapperState state){
                 switch (state){
@@ -128,6 +143,9 @@ public class Intake {
                         break;
                     case CLOSE:
                         robot.IntFlapper.setPosition(Globals.flapperClose);
+                        break;
+                    case HOLD:
+                        robot.IntFlapper.setPosition(Globals.flapperHold);
                         break;
                 }
         }
@@ -138,6 +156,8 @@ public class Intake {
                 RIGHT90,
                 LEFT90,
                 INIT,
+                OBSR,
+                OBSSRDROP
 
         }
 
@@ -158,6 +178,9 @@ public class Intake {
                     case RIGHT90:
                         robot.IntYaw.setPosition(Globals.yawRight90);
                         break;
+                        case OBSR:
+                            robot.IntYaw.setPosition(Globals.yawObs);
+                        break;
                 }
         }
         public void intakeRoller(double power){
@@ -168,6 +191,7 @@ public class Intake {
             robot.IntRightShoulder.setPosition(pos);
             robot.IntLeftShoulder.setPosition(1-pos);
         }
+
         public void extensionPos(int pos){
             robot.horizontalExtension.setTargetPosition(pos);
             robot.horizontalExtension.setMode(DcMotor.RunMode.RUN_TO_POSITION);

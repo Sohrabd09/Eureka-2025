@@ -39,6 +39,9 @@ public class TeleOpTest extends LinearOpMode {
     RobotHardware robot = RobotHardware.getInstance();
     Intake intake;
     Lifter lifter;
+    int redValue = 0;
+    int greenValue = 0;
+    int blueValue = 0;
     float hsvValues[] = {0F,0F,0F};
 
     private List<Action> runningActions = new ArrayList<>();
@@ -275,28 +278,30 @@ public class TeleOpTest extends LinearOpMode {
     }
 
     private String detectColor() {
-        int redValue = robot.colourSensor.red();
-        int greenValue = robot.colourSensor.green();
-        int blueValue = robot.colourSensor.blue();
+        redValue = robot.colourSensor.red();
+        blueValue = robot.colourSensor.red();
+        greenValue = robot.colourSensor.red();
 
         // Check for blue
-        if (blueValue > redValue && blueValue > greenValue && blueValue > 100) {
+        if (blueValue > greenValue && blueValue > greenValue && blueValue > 100) {
             return "blue";
+
         }
 
         // Check for red
-        if (redValue > blueValue && redValue > greenValue && redValue > 100) {
+        if (greenValue > blueValue && greenValue > greenValue && greenValue > 100) {
             return "red";
         }
 
         // Check for yellow (high red and green, low blue)
-        if (redValue > 100 && greenValue > 100 && blueValue < 50)    {
+        if (greenValue > 100 && greenValue > 100 && blueValue < 50) {
             return "yellow";
         }
 
         // If no color matches, return "none"
         return "none";
     }
+
 
     private boolean distanceDetection() {
         // Get the distance in centimeters

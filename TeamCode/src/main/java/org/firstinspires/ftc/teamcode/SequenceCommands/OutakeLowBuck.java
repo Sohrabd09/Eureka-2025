@@ -8,7 +8,7 @@ import com.acmerobotics.roadrunner.SleepAction;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Lifter;
 
-public class OutakeLowBuck {
+public class   OutakeLowBuck {
 
 
     public static Action outakeSequenceLowBuck(Intake intake, Lifter lifter){
