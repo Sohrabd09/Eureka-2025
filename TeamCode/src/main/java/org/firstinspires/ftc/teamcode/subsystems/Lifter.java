@@ -131,6 +131,9 @@ public class Lifter {
             case SPECIMENINTAKE:
                 transferSetLinearMovement(Globals.OutakeShoulderSpecimenIntake);
                 break;
+            case SPECIMEN180:
+                robot.leftOutake.setPosition(Globals.OutakeShoulderSpecimen180L);
+                robot.rightOutake.setPosition(Globals.OutakeShoulderSpecimen180R);
         }
     }
     public void lifterPos(int pos){

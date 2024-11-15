@@ -13,19 +13,14 @@ public class SpecimenDropFinal {
         public static Action specimenDropFinal(Intake intake, Lifter lifter){
             return new SequentialAction(
                     new ParallelAction(
-                            lifter.transferState(Lifter.TransferState.SPECIMEN),
+                            lifter.transferState(Lifter.TransferState.SPECIMEN180),
                             lifter.gripperState(Lifter.gripperState.CLOSE)
                     ),
-                    lifter.lifterState(Lifter.lifterState.LOWBUCKET),
+                    lifter.transferState(Lifter.TransferState.SPECIMEN),
                     lifter.gripperState(Lifter.gripperState.OPEN),
                     new SleepAction(0.3),
-                    new ParallelAction(
-                            lifter.lifterState(Lifter.lifterState.INIT),
-                            lifter.gripperState(Lifter.gripperState.OPEN),
-                            lifter.wristState(Lifter.outakeWristState.TRANSFER),
-                            lifter.transferState(Lifter.TransferState.INIT)
+                    lifter.lifterState(Lifter.lifterState.INIT)
 
-                            )
 
 
             );

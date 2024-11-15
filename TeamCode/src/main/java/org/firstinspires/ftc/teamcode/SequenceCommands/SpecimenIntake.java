@@ -14,6 +14,7 @@ public class SpecimenIntake {
                 new ParallelAction(
                         lifter.lifterState(Lifter.lifterState.INIT),
                         lifter.gripperState(Lifter.gripperState.OPEN),
+
                         lifter.wristState(Lifter.outakeWristState.SPECIMEN),
                         lifter.transferState(Lifter.TransferState.SPECIMENINTAKE)
                 )

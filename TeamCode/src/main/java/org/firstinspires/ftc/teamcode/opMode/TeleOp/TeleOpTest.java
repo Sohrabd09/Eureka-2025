@@ -17,6 +17,9 @@ import org.firstinspires.ftc.teamcode.SequenceCommands.INITsequence;
 import org.firstinspires.ftc.teamcode.SequenceCommands.IntakeSequence;
 import org.firstinspires.ftc.teamcode.SequenceCommands.OutakeLowBuck;
 import org.firstinspires.ftc.teamcode.SequenceCommands.OutakeSequenceHighBuck;
+import org.firstinspires.ftc.teamcode.SequenceCommands.PostObsrSeq;
+import org.firstinspires.ftc.teamcode.SequenceCommands.PreIntakeSeq;
+import org.firstinspires.ftc.teamcode.SequenceCommands.PreObsrSeq;
 import org.firstinspires.ftc.teamcode.SequenceCommands.ResetAction;
 import org.firstinspires.ftc.teamcode.SequenceCommands.SampleDropSeq;
 import org.firstinspires.ftc.teamcode.SequenceCommands.SpecimenDropFinal;
@@ -49,10 +52,13 @@ public class TeleOpTest extends LinearOpMode {
     String [] SpecimenState = {"HIGH"};
     String[] horizontalExtensionStateArray = {"INIT"};
     String[] lifterStateArray = {"INIT"};
+    String[] OBSORBUCKARRAY = {"OBSR"};
     //TODO FLAGS
     public boolean extensionFlag = false;
     public boolean sliderFlag = false;
     public boolean flapperFlag = false;
+
+    public boolean gmp2X = false;
     public boolean specimenIntakePosFlag = false;
 
     public TeleOpTest(RobotHardware robot) {
@@ -88,12 +94,21 @@ public class TeleOpTest extends LinearOpMode {
                 runningActions.add(ResetAction.resetAction(intake,lifter));
             }
             if (gamepad1.x){
-                runningActions.add(IntakeSequence.intakeSequence(intake,lifter));
+                runningActions.add(
+                        new SequentialAction(
+                                PreIntakeSeq.preIntake(intake,lifter),
+                                new SleepAction(1),
+                                IntakeSequence.intakeSequence(intake,lifter)
+                        ));
                 extensionFlag = true;
 
             }
-            if ( robot.beamBreaker.getState() == true && !flapperFlag){
+            if ( robot.beamBreaker.getState() && !flapperFlag && OBSORBUCKARRAY[0].equals( "BUCK")){
                 runningActions.add(TransferSequence.transferSequence(intake,lifter));
+                extensionFlag = false;
+            }
+            if ( robot.beamBreaker.getState()  && !flapperFlag && OBSORBUCKARRAY[0].equals("OBSR")){
+                runningActions.add(PreObsrSeq.preObsr(intake,lifter));
                 extensionFlag = false;
             }
             if (gamepad1.right_trigger>0.5){
@@ -104,13 +119,13 @@ public class TeleOpTest extends LinearOpMode {
                 runningActions.add(SpecimenIntakePost.specimenIntakePost(intake,lifter));
                 sliderFlag = true;
                 SpecimenState[0]="HIGH";
-                lifterStateArray[0]="HIGHBUCK";
+                lifterStateArray[0]="HIGHRUNGS";
             }
             else if (gamepad1.left_stick_button && specimenIntakePosFlag&&SpecimenState[0].equals("HIGH")){
                 runningActions.add(SpecimenIntakePost.specimenIntakePost(intake,lifter));
                 sliderFlag = true;
                 SpecimenState[0]="HIGH";
-                lifterStateArray[0]="HIGHBUCK";
+                lifterStateArray[0]="HIGHRUNGS";
             }
 
             if (distanceDetection() && specimenIntakePosFlag&&SpecimenState[0].equals("LOW")){
@@ -156,9 +171,7 @@ public class TeleOpTest extends LinearOpMode {
 
             }
             if (gamepad1.b){
-                runningActions.add(
-                        new InstantAction(()->intake.activeIntakeState(Intake.ActiveIntakeState.REVERSE))
-                );
+                runningActions.add(PostObsrSeq.postObsr(intake,lifter));
             }
 
 
@@ -183,11 +196,25 @@ public class TeleOpTest extends LinearOpMode {
             }
         //TODO HANGING
         //TODO OPERATOR CONTROLS
-        if (gamepad1.a){
+        if (gamepad2.x && OBSORBUCKARRAY[0].equals("BUCK" ) )  {
+            OBSORBUCKARRAY[0]="OBSR";
+
+        }
+        if (gamepad2.x && OBSORBUCKARRAY[0].equals("OBSR"))   {
+            OBSORBUCKARRAY[0]="BUCK";
+
+        }
+
+        if (gamepad2.a){
             BucketState[0] = "LOW";
         }
-        if (gamepad1.b){
+        if (gamepad2.b){
             SpecimenState[0] = "LOW";
+        }
+        if (gamepad2.y){
+            runningActions.add((
+                    PreIntakeSeq.preIntake(intake,lifter)
+                    ));
         }
         if (gamepad2.dpad_up){
             robot.IntYaw.setPosition(Globals.yawInit);
@@ -260,6 +287,7 @@ public class TeleOpTest extends LinearOpMode {
             telemetry.addData("Distance Detection: ", distanceInMM());
             telemetry.addData("Intake Distance Detection: ", robot.colourSensor.getDistance(DistanceUnit.MM));
             telemetry.addData("Lifter State: ", lifterStateArray);
+            telemetry.addData("OBSR or BUCK: ", OBSORBUCKARRAY);
 //            telemetry.addData("Beam Breaker", robot.beamBreaker.getState());
 //            telemetry.addData("Horizontal Extension ", robot.horizontalExtension.getCurrentPosition());
 //            telemetry.addData("Slider L ", robot.lifterL.getCurrentPosition());

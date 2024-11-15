@@ -16,7 +16,7 @@ public class SpecimenIntakeLowPost {
             new SleepAction(0.2),
             new ParallelAction(
                     lifter.lifterState(Lifter.lifterState.LOWRUNGS),
-                    lifter.transferState(Lifter.TransferState.SPECIMEN),
+                    lifter.transferState(Lifter.TransferState.SPECIMEN180),
                     lifter.wristState(Lifter.outakeWristState.SPECIMENDROP)
             )
 

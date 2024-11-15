@@ -28,7 +28,8 @@ public class Globals {
                 public  static  double shoulderPreIntake= 0 ;
 
                 public static double shoulderObs = 0.495;
-                public static double shoulderObsDrop = 0.495;
+                public static double shoulderObsDropL = 0.495;
+                public static double shoulderObsDropR = 0.495;
 
 
 
@@ -79,7 +80,7 @@ public class Globals {
             public static double OutakeShoulderBucket = 0;
             public static double OutakeShoulderSpecimen = 0.285;
 
-            public static double OutakeShoulderSpecimen180 = 0;
+            public static double OutakeShoulderSpecimen180R = 0;
             public static double OutakeShoulderSpecimen180L = 0;
             public static double OutakeShoulderSpecimenIntake = 0.9667;
 

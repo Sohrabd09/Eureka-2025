@@ -45,6 +45,8 @@ public class Intake {
             RESET,
             PREINTAKE,
             OBSERVATION,
+            OBSERVATIONDROP,
+
 
 
     }
@@ -69,6 +71,9 @@ public class Intake {
                 break;
             case OBSERVATION:
                 shoulderPos(Globals.shoulderObs);
+            case OBSERVATIONDROP:
+                robot.IntLeftShoulder.setPosition(Globals.shoulderObsDropL);
+                robot.IntRightShoulder.setPosition(Globals.shoulderObsDropR);
         }
     }
 
@@ -136,6 +141,9 @@ public class Intake {
                 HOLD,
 
         }
+
+
+
         public void update(flapperState state){
                 switch (state){
                     case OPEN:
@@ -157,7 +165,7 @@ public class Intake {
                 LEFT90,
                 INIT,
                 OBSR,
-                OBSSRDROP
+//                OBSSRDROP
 
         }
 
