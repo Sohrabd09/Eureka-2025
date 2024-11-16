@@ -80,15 +80,16 @@ public class RobotHardware {
         return instance;
     }
 
-    public void init1(HardwareMap hardwareMap, Telemetry telemetry) {
+    public void init1(HardwareMap hardwareMap) {
 
 
         //TODO HARDWARE MAP
         //DcMotor
         lifterL = hardwareMap.get(DcMotorEx.class, "sliderL");
         lifterL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        lifterR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         lifterR = hardwareMap.get(DcMotorEx.class, "sliderR");
+        lifterR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         horizontalExtension = hardwareMap.get(DcMotorEx.class, "horizontal");
         horizontalExtension.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
@@ -114,7 +115,7 @@ public class RobotHardware {
 
         //Sensor
         colourSensor = hardwareMap.get(RevColorSensorV3.class, "csI");
-        gripColourSensor = hardwareMap.get(RevColorSensorV3.class,"cs0");
+        gripColourSensor = hardwareMap.get(RevColorSensorV3.class,"csO");
 //        specimenCam = hardwareMap.get(Camera.class, "cam1");
         beamBreaker = hardwareMap.get(DigitalChannel.class, "bb");
         beamBreaker.setMode(DigitalChannel.Mode.INPUT);

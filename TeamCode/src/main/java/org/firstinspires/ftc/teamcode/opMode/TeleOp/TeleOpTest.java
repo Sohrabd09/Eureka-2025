@@ -69,10 +69,17 @@ public class TeleOpTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
-        lifter = new Lifter(robot);
+
         intake = new Intake(robot);
         lifter = new Lifter(robot);
-         double colour = robot.colourSensor.hashCode();
+        double colour = robot.colourSensor.hashCode();
+
+        while(opModeInInit()){
+            robot.init1(hardwareMap);
+        }
+
+
+
         waitForStart();
 
         while (opModeInInit()){
@@ -82,10 +89,14 @@ public class TeleOpTest extends LinearOpMode {
             double x = gamepad1.left_stick_x;
             double y = -gamepad1.left_stick_y;
             double turn = gamepad1.right_stick_x;
-            drive.setDrivePowers(new PoseVelocity2d(new Vector2d(x, y), turn));
-            drive.updatePoseEstimate();
+
+
             if (gamepad1.left_trigger>0.4){
                 drive.setDrivePowers(new PoseVelocity2d(new Vector2d(x/2, y/2), turn/2));
+                drive.updatePoseEstimate();
+            }
+            else {
+                drive.setDrivePowers(new PoseVelocity2d(new Vector2d(x, y), turn));
                 drive.updatePoseEstimate();
             }
 
@@ -103,7 +114,7 @@ public class TeleOpTest extends LinearOpMode {
                 extensionFlag = true;
 
             }
-            if ( robot.beamBreaker.getState() && !flapperFlag && OBSORBUCKARRAY[0].equals( "BUCK")){
+            if ( !robot.beamBreaker.getState() && !flapperFlag && OBSORBUCKARRAY[0].equals( "BUCK")){
                 runningActions.add(TransferSequence.transferSequence(intake,lifter));
                 extensionFlag = false;
             }
@@ -288,6 +299,9 @@ public class TeleOpTest extends LinearOpMode {
             telemetry.addData("Intake Distance Detection: ", robot.colourSensor.getDistance(DistanceUnit.MM));
             telemetry.addData("Lifter State: ", lifterStateArray);
             telemetry.addData("OBSR or BUCK: ", OBSORBUCKARRAY);
+
+
+
 //            telemetry.addData("Beam Breaker", robot.beamBreaker.getState());
 //            telemetry.addData("Horizontal Extension ", robot.horizontalExtension.getCurrentPosition());
 //            telemetry.addData("Slider L ", robot.lifterL.getCurrentPosition());

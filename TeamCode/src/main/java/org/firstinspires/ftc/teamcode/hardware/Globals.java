@@ -7,15 +7,15 @@ public class Globals {
 
     //  TODO INTAKE
             // TODO GRIPPER
-                    public static double gripperOpen = 0.4772;
+                    public static double gripperOpen = 0.4788;
                     public static double gripperINIT = 0;
-                    public static double gripperClose = 0.29;
+                    public static double gripperClose = 0.344;
             // TODO YAW
                     public static double yawLeft90 = 0 ;
                     public static double yawRight90 = 0 ;
-                    public static double yawLeft45 = 0 ;
-                    public static double yawRight45 = 0 ;
-                    public static double yawInit = 0 ;
+                    public static double yawLeft45 = 0.7289 ;
+                    public static double yawRight45 = 1 ;
+                    public static double yawInit = 0.855 ;
                     public static double yawObs = 0 ;
                     public static double yawObsDrop = 0 ;
 
@@ -37,20 +37,20 @@ public class Globals {
 
 
             // TODO IntWrist
-                    public static double IntWristIntake = 0.7172;
-                    public static double IntWristInit = 0.;
+                    public static double IntWristIntake = 0.6356;
+                    public static double IntWristInit = 0.7174;
                     public static double IntWristReset = 0;
-                    public static double IntWristTransfer = 0;
-                    public static double IntWristPre = 0;
+                    public static double IntWristTransfer = 0.9206;
+                    public static double IntWristPre = 0.6898;
                     public static double IntWristObs = 0;
-                    public static double IntWristObsDrop = 0;
+                    public static double IntWristObsDrop = 0.2672;
 
 
 
 
     //  TODO FLAPPER
 
-            public static double flapperOpen = 0.5978;
+            public static double flapperOpen = 0.2859;
             public static double flapperClose = 0.9;
             public static double flapperHold = 0.9;
             public static double flapper = 0.9;
@@ -58,9 +58,9 @@ public class Globals {
 
     // TODO HORIZONTALEXTENSION
             public static  int extendInit = 0 ;
-            public static  int extend1 = 0 ;
-            public static  int extend2 = 0 ;
-            public static  int extend3 = 0 ;
+            public static  int extend1 = 350 ;
+            public static  int extend2 = 500 ;
+            public static  int extend3 = 650 ;
 
     //  TODO OUTAKE
             public static int lowRung = 0;
@@ -69,7 +69,7 @@ public class Globals {
             public static  int lowBuck = 0;
             public static int HighBuck = 0;
 
-            public static double OutakeWristTransfer = 0 ;
+            public static double OutakeWristTransfer = 0.1911 ;
             public static double OutakeWristSpecimen = 0.3844 ;
             public static double OutakeWristSpecimenDrop = 0.3922 ;
             public static double OutakeWristBucket = 0 ;
