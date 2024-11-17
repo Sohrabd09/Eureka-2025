@@ -32,6 +32,7 @@ public class getValues extends LinearOpMode {
 
     public double outakeWristState = 0.5;
     public double gripperIncrement = 0.5;
+    public double flapperIncrement = 0.5;
     public double clutchIncrement = 0 ;
     public static int greenValue = 0;
     public static int blueValue = 0;
@@ -104,6 +105,15 @@ public class getValues extends LinearOpMode {
                 shoulderMotionInt(false);
 
             }
+            if  (gamepad1.start){
+                flapperIncrement +=0.01;
+                robot.IntFlapper.setPosition(flapperIncrement);
+            }
+            if  (gamepad1.back){
+                flapperIncrement -=0.01;
+                robot.IntFlapper.setPosition(flapperIncrement);
+            }
+            // TODO OUTAKE
             if (gamepad2.x){
                 outakeWristState +=0.001;
                 robot.OutakeWirst.setPosition(outakeWristState);
@@ -134,8 +144,8 @@ public class getValues extends LinearOpMode {
                 transferIncrement -=0.001;
                 lifter.transferSetLinearMovement(transferIncrement);
             }
-            telemetry.addData("Intake Colour Sensor ", robot.colourSensor.green());
-            telemetry.addData("Distance Detection ", distanceDetection());
+            telemetry.addData("Intake Colour Sensor ", detectColor());
+            telemetry.addData("Distance Detection ", robot.gripColourSensor.getDistance(DistanceUnit.MM));
             telemetry.addData("Beam Breaker", robot.beamBreaker.getState());
             telemetry.addData("Horizontal Extension ", robot.horizontalExtension.getCurrentPosition());
             telemetry.addData("Slider L ", robot.lifterL.getCurrentPosition());
@@ -159,6 +169,7 @@ public class getValues extends LinearOpMode {
 
              blueValue = robot.colourSensor.blue();
              greenValue = robot.colourSensor.green();
+             redValue = robot.colourSensor.red();
 
 
             // Check for blue
@@ -168,7 +179,7 @@ public class getValues extends LinearOpMode {
             }
 
             // Check for red
-            if (greenValue > blueValue && greenValue > greenValue && greenValue > 100) {
+            else if (redValue>greenValue && redValue > 100) {
                 return "red";
             }
 
