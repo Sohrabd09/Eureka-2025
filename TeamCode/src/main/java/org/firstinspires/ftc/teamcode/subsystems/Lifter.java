@@ -26,6 +26,8 @@ public class Lifter {
             HIGHRUNGS,
 
             LOWRUNGS,
+            HAGNINGPRE,
+            HANGINGPOST
         }
 
     public void update(lifterState state){
@@ -42,10 +44,15 @@ public class Lifter {
                 case HIGHBUCKET:
                     lifterPos(Globals.HighBuck);
                     break;
-
                 case INIT:
                     lifterPos(Globals.lifterInit);
-
+                    break;
+                case HAGNINGPRE:
+                    lifterPos(Globals.HangingPre);
+                    break;
+                case HANGINGPOST:
+                    lifterPos(Globals.HangingPost);
+                    break;
             }
 
 
@@ -71,6 +78,24 @@ public class Lifter {
             case OPEN:
                 robot.OutakeGrip.setPosition(Globals.gripperOpen);
                 break;
+        }
+    }
+    public enum clutchState {
+
+       HANGING,
+        TELEOP
+    }
+
+
+    public void update(clutchState state){
+        switch (state){
+            case TELEOP:
+                robot.clutch.setPosition(Globals.clutchTeleOp);
+                break;
+            case HANGING:
+                robot.clutch.setPosition(Globals.clutchHanging);
+                break;
+
         }
     }
 
@@ -100,6 +125,7 @@ public class Lifter {
                 break;
             case SPECIMENDROP:
                 robot.OutakeWirst.setPosition(Globals.OutakeWristSpecimenDrop);
+                break;
         }
     }
 
@@ -134,6 +160,7 @@ public class Lifter {
             case SPECIMEN180:
                 robot.leftOutake.setPosition(Globals.OutakeShoulderSpecimen180L);
                 robot.rightOutake.setPosition(Globals.OutakeShoulderSpecimen180R);
+                break;
         }
     }
     public void lifterPos(int pos){

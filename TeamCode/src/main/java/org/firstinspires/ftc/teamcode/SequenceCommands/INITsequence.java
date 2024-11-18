@@ -23,7 +23,9 @@ public class INITsequence {
                         lifter.gripperState(Lifter.gripperState.OPEN),
                         lifter.wristState(Lifter.outakeWristState.TRANSFER),
                         lifter.transferState(Lifter.TransferState.INIT),
+                        lifter.clutchState(Lifter.clutchState.LIFTER),
                         intake.flapperState(Intake.flapperState.CLOSE)
+
 
                         ),
                 new SleepAction(0.3),

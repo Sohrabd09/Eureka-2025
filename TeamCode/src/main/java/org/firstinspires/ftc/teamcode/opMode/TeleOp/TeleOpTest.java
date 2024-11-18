@@ -114,6 +114,14 @@ public class TeleOpTest extends LinearOpMode {
                 extensionFlag = true;
 
             }
+            if (gamepad1.x && !horizontalExtensionStateArray[0].equals("INIT") || extensionFlag){
+                runningActions.add(
+                        INITsequence.initSequence(intake,lifter)
+                );
+                extensionFlag =false;
+
+
+            }
             if ( !robot.beamBreaker.getState() && !flapperFlag && OBSORBUCKARRAY[0].equals( "BUCK")){
                 runningActions.add(TransferSequence.transferSequence(intake,lifter));
                 extensionFlag = false;
@@ -145,7 +153,7 @@ public class TeleOpTest extends LinearOpMode {
                 SpecimenState[0]="HIGH";
                 lifterStateArray[0]="LOWBUCK";
             }
-            if(gamepad1.x){
+            if(gamepad1.y){
                 runningActions.add(SpecimenDropFinal.specimenDropFinal(intake,lifter));
                 lifterStateArray[0]="INIT";
             }
@@ -206,6 +214,17 @@ public class TeleOpTest extends LinearOpMode {
 
             }
         //TODO HANGING
+
+            if (gamepad2.start){
+                runningActions.add(
+                        new SequentialAction(
+                               lifter.lifterState(Lifter.lifterState.HAGNINGPRE),
+                                new SleepAction(0.4),
+                               lifter.clutchState(Lifter.clutchState.HANGING),
+                               lifter.lifterState(Lifter.lifterState.HANGINGPOST)
+                        )
+                );
+            }
         //TODO OPERATOR CONTROLS
         if (gamepad2.x && OBSORBUCKARRAY[0].equals("BUCK" ) )  {
             OBSORBUCKARRAY[0]="OBSR";
@@ -216,8 +235,11 @@ public class TeleOpTest extends LinearOpMode {
 
         }
 
-        if (gamepad2.a){
+        if (gamepad2.a && BucketState[0].equals("HIGH")){
             BucketState[0] = "LOW";
+        }
+        if (gamepad2.a && BucketState[0].equals("LOW")){
+            BucketState[0] = "HIGH";
         }
         if (gamepad2.b){
             SpecimenState[0] = "LOW";

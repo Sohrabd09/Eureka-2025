@@ -31,7 +31,7 @@ public class RobotHardware {
         public Servo IntFlapper= null;
         public Servo IntWrist= null;
         //TODO HANGER
-        public Servo Hanger= null;
+        public Servo clutch= null;
         // TODO OUTAKE
         public Servo leftOutake= null;
         public Servo rightOutake= null;
@@ -106,7 +106,7 @@ public class RobotHardware {
         IntYaw = hardwareMap.get(Servo.class, "yaw");
         IntLeftShoulder = hardwareMap.get(Servo.class, "elbowL");
         IntRightShoulder = hardwareMap.get(Servo.class, "elbowR");
-        Hanger = hardwareMap.get(Servo.class, "clutch");
+        clutch = hardwareMap.get(Servo.class, "clutch");
         OutakeWirst = hardwareMap.get(Servo.class, "wristOut");
         IntWrist = hardwareMap.get(Servo.class, "wrist");
         IntFlapper = hardwareMap.get(Servo.class, "flap");

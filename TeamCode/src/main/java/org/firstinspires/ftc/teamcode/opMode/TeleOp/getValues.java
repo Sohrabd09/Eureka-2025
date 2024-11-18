@@ -37,8 +37,10 @@ public class getValues extends LinearOpMode {
     public static int greenValue = 0;
     public static int blueValue = 0;
     public static int redValue = 0;
+    public double LShoulderPosOut = 0;
+    public double RShoulderPos = 0;    
     public double LShoulderPos = 0;
-    public double RShoulderPos = 0;
+    public double RShoulderPosOut = 0;
     public double OutakeDistance = 25;
 
 
@@ -113,6 +115,15 @@ public class getValues extends LinearOpMode {
                 flapperIncrement -=0.01;
                 robot.IntFlapper.setPosition(flapperIncrement);
             }
+            if (gamepad1.right_stick_button){
+                intake.activeIntakeState(Intake.ActiveIntakeState.ON);
+            }           
+            if (gamepad1.left_stick_button){
+                intake.activeIntakeState(Intake.ActiveIntakeState.REVERSE);
+            }
+            else {
+                intake.activeIntakeState(Intake.ActiveIntakeState.OFF);
+            }
             // TODO OUTAKE
             if (gamepad2.x){
                 outakeWristState +=0.001;
@@ -177,7 +188,6 @@ public class getValues extends LinearOpMode {
                 return "blue";
 
             }
-
             // Check for red
             else if (redValue>greenValue && redValue > 100) {
                 return "red";
@@ -204,24 +214,24 @@ public class getValues extends LinearOpMode {
 
     private void shoulderMotionOut(boolean increase) {
         if (increase) {
-            LShoulderPos= Math.min( LShoulderPos+ 0.001, 1);
-            RShoulderPos = Math.min(RShoulderPos + 0.001, 1);
+            LShoulderPosOut= Math.min( LShoulderPosOut+ 0.001, 1);
+            RShoulderPosOut = Math.min(RShoulderPosOut + 0.001, 1);
         } else {
-            LShoulderPos= Math.max( LShoulderPos- 0.001, 0);
-            RShoulderPos = Math.max(RShoulderPos - 0.001, 0);
+            LShoulderPosOut= Math.max( LShoulderPosOut- 0.001, 0);
+            RShoulderPosOut = Math.max(RShoulderPosOut - 0.001, 0);
         }
-        robot.leftOutake.setPosition(LShoulderPos);
-        robot.rightOutake.setPosition(RShoulderPos);
+        robot.leftOutake.setPosition(LShoulderPosOut);
+        robot.rightOutake.setPosition(RShoulderPosOut);
     }
     private void shoulderMotionInt(boolean increase) {
         if (increase) {
-            LShoulderPos= Math.min( LShoulderPos+ 0.001, 1);
+            LShoulderPos = Math.min( LShoulderPos+ 0.001, 1);
             RShoulderPos = Math.min(RShoulderPos + 0.001, 1);
         } else {
-            LShoulderPos= Math.max( LShoulderPos- 0.001, 0);
+            LShoulderPosOut= Math.max( LShoulderPos- 0.001, 0);
             RShoulderPos = Math.max(RShoulderPos - 0.001, 0);
         }
-        robot.IntLeftShoulder.setPosition(LShoulderPos);
+        robot.IntLeftShoulder.setPosition(LShoulderPosOut);
         robot.IntRightShoulder.setPosition(RShoulderPos);
     }
     private void viperMotion(boolean increase) {
@@ -234,6 +244,17 @@ public class getValues extends LinearOpMode {
         }
         robot.IntLeftShoulder.setPosition(LShoulderPos);
         robot.IntRightShoulder.setPosition(RShoulderPos);
+        }
+    private void viperMotionOut(boolean increase) {
+        if (increase) {
+            LShoulderPosOut = Math.min(LShoulderPosOut + 0.01, 1);
+            RShoulderPosOut = Math.max(RShoulderPosOut - 0.01, 0);
+        } else {
+            LShoulderPosOut = Math.min(LShoulderPosOut - 0.01, 1);
+            RShoulderPosOut = Math.max(RShoulderPosOut + 0.01, 0);
+        }
+        robot.leftOutake.setPosition(LShoulderPosOut);
+        robot.rightOutake.setPosition(RShoulderPosOut);
         }
 
     public List<Action> updateAction() {

@@ -17,7 +17,6 @@ public class Globals {
                     public static double yawRight45 = 1 ;
                     public static double yawInit = 0.855 ;
                     public static double yawObs = 0 ;
-                    public static double yawObsDrop = 0 ;
 
 
            // TODO Shoulder
@@ -26,7 +25,6 @@ public class Globals {
                 public  static  double shoulderIntake = 0.0128 ;
                 public  static  double shoulderReset= 0 ;
                 public  static  double shoulderPreIntake= 0 ;
-
                 public static double shoulderObs = 0.495;
                 public static double shoulderObsDropL = 0.495;
                 public static double shoulderObsDropR = 0.495;
@@ -68,6 +66,8 @@ public class Globals {
             public static int HigRung = 0;
             public static  int lowBuck = 0;
             public static int HighBuck = 0;
+            public static int HangingPre = 0;
+            public static int HangingPost = 0;
 
             public static double OutakeWristTransfer = 0.1911 ;
             public static double OutakeWristSpecimen = 0.3844 ;
@@ -75,11 +75,11 @@ public class Globals {
             public static double OutakeWristBucket = 0 ;
             public static double OutakeWristDrop = 0 ;
 
+
             public static double OutakeShoulderInit = 0.5;
             public static double OutakeShoulderTransfer = 0;
             public static double OutakeShoulderBucket = 0;
             public static double OutakeShoulderSpecimen = 0.285;
-
             public static double OutakeShoulderSpecimen180R = 0;
             public static double OutakeShoulderSpecimen180L = 0;
             public static double OutakeShoulderSpecimenIntake = 0.9667;
@@ -93,5 +93,7 @@ public class Globals {
             
 
     //  TODO HAGNING
+        public static double clutchHanging;
+        public static double clutchTeleOp;
 
 }
