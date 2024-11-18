@@ -16,7 +16,7 @@ public class SpecimenDropFinal {
                             lifter.transferState(Lifter.TransferState.SPECIMEN180),
                             lifter.gripperState(Lifter.gripperState.CLOSE)
                     ),
-                    lifter.transferState(Lifter.TransferState.SPECIMEN),
+                    lifter.transferState(Lifter.TransferState.SPECIMENDROP),
                     lifter.gripperState(Lifter.gripperState.OPEN),
                     new SleepAction(0.3),
                     lifter.transferState(Lifter.TransferState.SPECIMENINTAKE),

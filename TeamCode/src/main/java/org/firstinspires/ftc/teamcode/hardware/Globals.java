@@ -94,8 +94,8 @@ public class Globals {
             public static double OutakeShoulderBucketL = 0.6189;
             public static double OutakeShoulderSpecimenR = 0.925;
             public static double OutakeShoulderSpecimenL = 0.8078;
-            public static double OutakeShoulderSpecimen180R = 0.815;
-            public static double OutakeShoulderSpecimen180L = 0.9389;
+            public static double OutakeShoulderSpecimen180R = 0.8567;
+            public static double OutakeShoulderSpecimen180L = 0.905;
             public static double OutakeShoulderSpecimenIntakeR = 0.1767;
             public static double OutakeShoulderSpecimenIntakeL = 0.8406;
 
