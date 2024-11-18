@@ -68,11 +68,11 @@ public class getValues extends LinearOpMode {
                 horizontalSliderIncrement-=25;
                 intake.extensionPos(horizontalSliderIncrement);
             }
-            if (gamepad1.left_trigger>0){
+            if (gamepad2.left_trigger>0){
                 sliderIncrement +=25;
                 lifter.lifterPos(sliderIncrement);
             }
-            if (gamepad1.right_trigger>0){
+            if (gamepad2.right_trigger>0){
                 sliderIncrement -=25;
                 lifter.lifterPos(sliderIncrement);
             }
@@ -116,10 +116,12 @@ public class getValues extends LinearOpMode {
                 robot.IntFlapper.setPosition(flapperIncrement);
             }
             if (gamepad1.right_stick_button){
-                intake.activeIntakeState(Intake.ActiveIntakeState.ON);
-            }           
+                robot.leftIntake.setPower(1);
+                robot.rightIntake.setPower(-1);
+            }
             if (gamepad1.left_stick_button){
-                intake.activeIntakeState(Intake.ActiveIntakeState.REVERSE);
+                robot.leftIntake.setPower(-1);
+                robot.rightIntake.setPower(1);
             }
             else {
                 intake.activeIntakeState(Intake.ActiveIntakeState.OFF);
@@ -134,12 +136,12 @@ public class getValues extends LinearOpMode {
                 robot.OutakeWirst.setPosition(outakeWristState);
             }
             if(gamepad2.a){
-                gripperIncrement+=0.001;
-                robot.OutakeGrip.setPosition(gripperIncrement);
+
+                robot.OutakeGrip.setPosition(Globals.gripperOpen);
             }
             if(gamepad2.b){
-                gripperIncrement-=0.001;
-                robot.OutakeGrip.setPosition(gripperIncrement);
+
+                robot.OutakeGrip.setPosition(Globals.gripperOpen);
             }
             if (gamepad2.dpad_left){
                 shoulderMotionOut(true);
@@ -148,12 +150,11 @@ public class getValues extends LinearOpMode {
                 shoulderMotionOut(false);
             }
             if (gamepad2.dpad_up){
-                transferIncrement +=0.001;
-                lifter.transferSetLinearMovement(transferIncrement);
+                viperMotionOut(true);
             }
+
             if (gamepad2.dpad_down){
-                transferIncrement -=0.001;
-                lifter.transferSetLinearMovement(transferIncrement);
+               viperMotionOut(false);
             }
             telemetry.addData("Intake Colour Sensor ", detectColor());
             telemetry.addData("Distance Detection ", robot.gripColourSensor.getDistance(DistanceUnit.MM));
@@ -194,7 +195,7 @@ public class getValues extends LinearOpMode {
             }
 
             // Check for yellow (high red and green, low blue)
-            else if (greenValue > 100 && blueValue < 50) {
+            else if (greenValue > 100 && blueValue > 100 && redValue <50) {
                 return "yellow";
             }
             else {
@@ -256,6 +257,8 @@ public class getValues extends LinearOpMode {
         robot.leftOutake.setPosition(LShoulderPosOut);
         robot.rightOutake.setPosition(RShoulderPosOut);
         }
+
+
 
     public List<Action> updateAction() {
         TelemetryPacket packet = new TelemetryPacket();

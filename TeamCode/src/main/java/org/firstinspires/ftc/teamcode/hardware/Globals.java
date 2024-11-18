@@ -6,10 +6,7 @@ import com.acmerobotics.dashboard.config.Config;
 public class Globals {
 
     //  TODO INTAKE
-            // TODO GRIPPER
-                    public static double gripperOpen = 0.4788;
-                    public static double gripperINIT = 0;
-                    public static double gripperClose = 0.344;
+
             // TODO YAW
                     public static double yawLeft90 = 0 ;
                     public static double yawRight90 = 0 ;
@@ -20,12 +17,19 @@ public class Globals {
 
 
            // TODO Shoulder
-                public  static  double shoulderInit = 0.5439 ;
-                public  static  double shoulderTransfer = 0 ;
-                public  static  double shoulderIntake = 0.0128 ;
-                public  static  double shoulderReset= 0 ;
-                public  static  double shoulderPreIntake= 0 ;
-                public static double shoulderObs = 0.495;
+                public  static  double shoulderInitL = 0.5439 ;
+                public  static  double shoulderInitR = 0.5439 ;
+
+                public  static  double shoulderTransferR = 0 ;
+                public  static  double shoulderTransferL = 0 ;
+                public  static  double shoulderIntakeL = 0.7078 ;
+                public  static  double shoulderIntakeR = 0.2378 ;
+                public  static  double shoulderResetR= 0 ;
+                public  static  double shoulderResetL= 0 ;
+                public  static  double shoulderPreIntakeR= 0 ;
+                public  static  double shoulderPreIntakeL= 0 ;
+                public static double shoulderObsR = 0.495;
+                public static double shoulderObsL = 0.495;
                 public static double shoulderObsDropL = 0.495;
                 public static double shoulderObsDropR = 0.495;
 
@@ -35,7 +39,7 @@ public class Globals {
 
 
             // TODO IntWrist
-                    public static double IntWristIntake = 0.6356;
+                    public static double IntWristIntake = 0.5606;
                     public static double IntWristInit = 0.7174;
                     public static double IntWristReset = 0;
                     public static double IntWristTransfer = 0.9206;
@@ -61,6 +65,12 @@ public class Globals {
             public static  int extend3 = 650 ;
 
     //  TODO OUTAKE
+
+    // TODO GRIPPER
+            public static double gripperOpen = 0.5;
+            public static double gripperINIT = 0;
+            public static double gripperClose = 0.3317;
+
             public static int lowRung = 0;
             public static int lifterInit = 0;
             public static int HigRung = 0;
@@ -70,19 +80,24 @@ public class Globals {
             public static int HangingPost = 0;
 
             public static double OutakeWristTransfer = 0.1911 ;
-            public static double OutakeWristSpecimen = 0.3844 ;
-            public static double OutakeWristSpecimenDrop = 0.3922 ;
-            public static double OutakeWristBucket = 0 ;
-            public static double OutakeWristDrop = 0 ;
+            public static double OutakeWristSpecimen = 0.3756 ;
+            public static double OutakeWristSpecimenDrop = 0.9656 ;
+            public static double OutakeWristBucket = 1 ;
+            public static double OutakeWristDrop = 1 ;
 
 
-            public static double OutakeShoulderInit = 0.5;
-            public static double OutakeShoulderTransfer = 0;
-            public static double OutakeShoulderBucket = 0;
-            public static double OutakeShoulderSpecimen = 0.285;
-            public static double OutakeShoulderSpecimen180R = 0;
-            public static double OutakeShoulderSpecimen180L = 0;
-            public static double OutakeShoulderSpecimenIntake = 0.9667;
+            public static double OutakeShoulderInitR = 0.1767;
+            public static double OutakeShoulderInitL = 0.8406;
+            public static double OutakeShoulderTransferR = 0;
+            public static double OutakeShoulderTransferL = 0;
+            public static double OutakeShoulderBucketR = 0.4389;
+            public static double OutakeShoulderBucketL = 0.6189;
+            public static double OutakeShoulderSpecimenR = 0.925;
+            public static double OutakeShoulderSpecimenL = 0.8078;
+            public static double OutakeShoulderSpecimen180R = 0.815;
+            public static double OutakeShoulderSpecimen180L = 0.9389;
+            public static double OutakeShoulderSpecimenIntakeR = 0.1767;
+            public static double OutakeShoulderSpecimenIntakeL = 0.8406;
 
 
 
@@ -93,7 +108,7 @@ public class Globals {
             
 
     //  TODO HAGNING
-        public static double clutchHanging;
-        public static double clutchTeleOp;
+        public static double clutchHanging = 0;
+        public static double clutchTeleOp = 0;
 
 }

@@ -141,20 +141,20 @@ public class Lifter {
     public void update(TransferState state){
         switch (state){
             case INIT:
-                transferSetLinearMovement(Globals.OutakeShoulderInit);
+                transferSetLinearMovement(Globals.OutakeShoulderInitL, Globals.OutakeShoulderInitR);
                 break;
             case TRANSFER:
-                transferSetLinearMovement(Globals.OutakeShoulderTransfer);
+                transferSetLinearMovement(Globals.OutakeShoulderTransferL, Globals.OutakeShoulderTransferR);
                 break;
             case BUCKET:
-                transferSetLinearMovement(Globals.OutakeShoulderBucket);
+                transferSetLinearMovement(Globals.OutakeShoulderBucketL, Globals.OutakeShoulderBucketR);
                 break;
 
             case SPECIMEN:
-                transferSetLinearMovement(Globals.OutakeShoulderSpecimen);
+                transferSetLinearMovement(Globals.OutakeShoulderSpecimenL, Globals.OutakeShoulderSpecimenR);
                 break;
             case SPECIMENINTAKE:
-                transferSetLinearMovement(Globals.OutakeShoulderSpecimenIntake);
+                transferSetLinearMovement(Globals.OutakeShoulderSpecimenIntakeL, Globals.OutakeShoulderSpecimenIntakeR);
                 break;
             case SPECIMEN180:
                 robot.leftOutake.setPosition(Globals.OutakeShoulderSpecimen180L);
@@ -170,9 +170,9 @@ public class Lifter {
         robot.lifterR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.lifterR.setPower(1);
     }
-    public void transferSetLinearMovement(double pos){
-        robot.leftOutake.setPosition(pos);
-        robot.rightOutake.setPosition(1-pos);
+    public void transferSetLinearMovement(double left, double right){
+        robot.leftOutake.setPosition(left);
+        robot.rightOutake.setPosition(right);
     }
 
 //    public void transferRotate(double left,double right){

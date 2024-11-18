@@ -55,22 +55,22 @@ public class Intake {
     public void update(shoulderState state){
         switch (state){
             case INTAKE:
-                shoulderPos(Globals.shoulderIntake);
+                shoulderPos(Globals.shoulderIntakeL, Globals.shoulderIntakeR);
                 break;
             case INIT:
-                shoulderPos(Globals.shoulderInit);
+                shoulderPos(Globals.shoulderInitL, Globals.shoulderInitR);
                 break;
             case RESET:
-                shoulderPos(Globals.shoulderReset);
+                shoulderPos(Globals.shoulderResetL, Globals.shoulderResetR);
                 break;
             case TRANSFER:
-                shoulderPos(Globals.shoulderTransfer);
+                shoulderPos(Globals.shoulderTransferL, Globals.shoulderTransferR);
                 break;
             case PREINTAKE:
-                shoulderPos(Globals.shoulderPreIntake);
+                shoulderPos(Globals.shoulderPreIntakeL, Globals.shoulderPreIntakeR);
                 break;
             case OBSERVATION:
-                shoulderPos(Globals.shoulderObs);
+                shoulderPos(Globals.shoulderObsL, Globals.shoulderObsR);
             case OBSERVATIONDROP:
                 robot.IntLeftShoulder.setPosition(Globals.shoulderObsDropL);
                 robot.IntRightShoulder.setPosition(Globals.shoulderObsDropR);
@@ -193,11 +193,11 @@ public class Intake {
         }
         public void intakeRoller(double power){
             robot.rightIntake.setPower(power);
-            robot.leftIntake.setPower(-power);
+            robot.leftIntake.setPower(power * (-1));
         }
-        public void shoulderPos(double pos){
-            robot.IntRightShoulder.setPosition(pos);
-            robot.IntLeftShoulder.setPosition(1-pos);
+        public void shoulderPos(double left, double right){
+            robot.IntRightShoulder.setPosition(right);
+            robot.IntLeftShoulder.setPosition(left);
         }
 
         public void extensionPos(int pos){

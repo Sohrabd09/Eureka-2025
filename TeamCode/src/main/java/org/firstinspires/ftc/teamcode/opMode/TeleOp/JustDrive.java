@@ -42,9 +42,9 @@ public class JustDrive extends LinearOpMode {
 
         while (opModeIsActive()) {
             // Drive controls
-            double x = gamepad1.left_stick_x;
-            double y = -gamepad1.left_stick_y;
-            double turn = gamepad1.right_stick_x;
+            double x = -gamepad1.left_stick_x;
+            double y = gamepad1.left_stick_y;
+            double turn = -gamepad1.right_stick_x;
 
             // Adjust speed with left trigger
             if (gamepad1.left_trigger > 0.4) {
