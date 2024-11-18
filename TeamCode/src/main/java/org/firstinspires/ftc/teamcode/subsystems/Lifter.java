@@ -81,7 +81,6 @@ public class Lifter {
         }
     }
     public enum clutchState {
-
        HANGING,
         TELEOP
     }
@@ -190,6 +189,9 @@ public class Lifter {
         return new InstantAction(()->update(state));
     }
     public Action lifterState (lifterState state){
+        return new InstantAction(()->update(state));
+    }
+    public Action clutchState (clutchState state){
         return new InstantAction(()->update(state));
     }
 

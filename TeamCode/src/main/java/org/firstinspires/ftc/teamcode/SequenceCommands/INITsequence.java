@@ -23,7 +23,7 @@ public class INITsequence {
                         lifter.gripperState(Lifter.gripperState.OPEN),
                         lifter.wristState(Lifter.outakeWristState.TRANSFER),
                         lifter.transferState(Lifter.TransferState.INIT),
-                        lifter.clutchState(Lifter.clutchState.LIFTER),
+                        lifter.clutchState(Lifter.clutchState.TELEOP),
                         intake.flapperState(Intake.flapperState.CLOSE)
 
 
